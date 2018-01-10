@@ -81,6 +81,8 @@ def load_ext_setters(path):
     for i in glob.iglob(os.path.join(path, '*setter.py')):
         if os.path.basename(i) == 'setter.py': continue
         logger.debug('"%s" seems like a setter', i)
+        if os.path.dirname(i) not in sys.path:
+            sys.path.append(os.path.dirname(i))
         name, ext = os.path.splitext(os.path.basename(i))
         try:
             logger.debug('loading %s', name)
@@ -93,6 +95,8 @@ _default_wallpaper_factory = WallpaperSetterFactory('default')
 
 register = _default_wallpaper_factory.register
 get = _default_wallpaper_factory.get
+
+
 
 if sys.platform.startswith('linux'):
     register('gnome2', Gnome2Setter)

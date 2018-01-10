@@ -558,7 +558,9 @@ def start(daemon=None):
     #last shooting
     configdb = prepare_config_db()
     run_config = load_config(configdb)
-    setter.load_ext_setters(dirname(abspath(argv[0])))
+    # setter.load_ext_setters(dirname(abspath(argv[0])))
+    setter.load_ext_setters(dirname(abspath(__file__)))
+    
 
     prepare_output_dir(run_config.output_folder)
     prepare_output_dir(dirname(HISTORY_FILE))
